@@ -1,8 +1,8 @@
 # Azure NetApp Files Utilities / anf_utils
 
-<a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/">Azure NetApp Files</a> is the perfect low-latency storage solution for storing your applications, libraries, code & configuration when running HPC jobs in Azure. With throughput up to 4.5GiB/s possible per volume, ANF actually performs well enough to use as the primary storage / scratch area for input/output datasets in many cases as well, without necessarily needing to resort to a parallel filesystem. 
+<a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/">Azure NetApp Files</a> (ANF) is the perfect low-latency storage solution for storing your applications, libraries, code & configuration when running HPC jobs in Azure. With throughput up to 4.5GiB/s possible per volume, ANF actually performs well enough to use as the primary storage / scratch area for input/output datasets in many cases as well, without necessarily needing to resort to a parallel filesystem. 
 
-These bash scripts designed to be run from linux using the Azure CLI to interact with Azure NetApp Files. You will need to have the Azure CLI installed, have run "az login" and selected the correct default subscription in which your Azure NetApp Files / ANF appliance is installed. 
+These bash scripts are provided to interact with ANF from your linux cluster or build hosts. You will need to have the Azure CLI installed, have run "az login" and selected the correct default subscription in which your Azure NetApp Files / ANF appliance is installed. 
 
 ## 1. anf_resize.sh
 
