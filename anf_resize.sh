@@ -69,8 +69,8 @@ volsize=`az netappfiles volume show --volume-name $volume --resource-group $rg -
 poolsizeTB="$(($poolsize/$tb))"
 volsizeTB="$(($volsize/$tb))"
 
-echo "volsize: $volsize"
-echo "poolsize: $poolsize"
+#echo "volsize: $volsize"
+#echo "poolsize: $poolsize"
 
 echo -e "ANF Account: \t\t$account"
 echo -e "Resource Group:\t\t$rg"
@@ -81,7 +81,7 @@ echo -e "Current volume size:\t$volsizeTB TiB"
 echo -e "Target pool size:\t$targetpoolsizeTB TiB [$targetpoolsize bytes]"
 echo -e "Target volume size:\t$targetvolsizeTB TiB [$targetvolsize bytes]"
 
-#-- az cli commands
+#-- az cli command setup
 volcmd="az netappfiles volume update --volume-name $volume --resource-group $rg --account-name $account --pool-name $pool --set usageThreshold=$targetvolsize --query \"usageThreshold\""
 poolcmd="az netappfiles pool update --size $targetpoolsizeTB --resource-group $rg --account-name $account --pool-name $pool --query \"size\""
 
@@ -157,3 +157,20 @@ poolsizeTB="$(($poolsize/$tb))"
 volsizeTB="$(($volsize/$tb))"
 echo -e "New pool size:\t$targetpoolsizeTB TiB [$targetpoolsize bytes]"
 echo -e "New volume size:\t$targetvolsizeTB TiB [$targetvolsize bytes]"
+
+# -- Finally, give estimate on performance capability
+tier=`az netappfiles pool show --resource-group $rg --account-name $account --pool-name $pool --query "serviceLevel"`
+echo "Tier for pool \"$pool\" volume \"$volume\" is $tier"
+if [ "$tier" = "\"Standard\"" ]; then
+   perf="$((16*$targetvolsizeTB))"
+elif [ "$tier" = "\"Premium\"" ]; then
+   perf="$((64*$targetvolsizeTB))"
+elif [ "$tier" = "\"Ultra\"" ]; then
+   perf="$((128*$targetvolsizeTB))"
+fi
+   
+# Max MiB/s: 
+# https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-performance-benchmarks
+cap=4500 
+if [[ $perf -gt $cap ]]; then perf=$cap; fi
+echo "Max throughput for volume \"$volume\" is now: $perf MiB/s"
