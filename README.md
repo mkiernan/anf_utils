@@ -13,7 +13,7 @@ The ANF service scales the total throughput cap relative to the capacity of a vo
 
 In some HPC scenarios such as benchmarking, it is interesting to be able to scale up the available bandwidth on the storage tier to remove any potential i/o bottlenecks while a benchmark or job is running, and then reduce the capacity & bandwidth again when the job/benchmark is finished, thus keeping costs to a minimum. 
 
-anf_resize.sh is a standalone utility that allows you to do this by resizing a volume and it's containing capacity pool up or down on demand. The API calls and resize operations complete quickly enough to mean that this functionality is practical to use as part of a pre- & post- task when running HPC jobs. 
+<a href=anf_resize.sh>anf_resize.sh</a> is a standalone utility that allows you to do this by resizing a volume and it's containing capacity pool up or down on demand. The API calls and resize operations complete quickly enough to mean that this functionality is practical to use as part of a pre- & post- task when running HPC jobs. 
 
 Utilization:
 
@@ -42,4 +42,10 @@ Before you run your job/benchmark, increase the Ultra tier bandwidth as follows:
 Once you've run your job/benchmark, you can resize back down as follows: 
 
 <img src="anf_resize.2.png">
+
+## 2. anf_snapshot.sh
+
+One of the key foundational features of NetApp is space efficient, instantaneous snapshots - meaning continuous protection for your data. Physical NetApp systems come with snapshots enabled and automated to run on a schedule out-of-the-box. Unfortunately the traditional NetApp WAFL scheduled snapshot functionality is not there yet with ANF [coming soon I'm assured!]. In the meantime you can create a snapshot interactively from the Azure Portal or the CLI, but there are no utilities in there yet to help you automate initiation of snapshots and manage the snapshot cycle. This script provides that. 
+
+[Coming shortly - still testing this one]
 
