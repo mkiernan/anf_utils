@@ -6,7 +6,7 @@ This is a bunch of bash scripts designed to be run from linux using the Azure CL
 
 The ANF service scales the total throughput cap relative to the capacity of a volume. Check out how the limits scale with capacity on <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels#throughput-limits">this page</a>. This table summarizes: 
 <br>
-<img src="anf_resize.1.png">
+<img src="tiers.PNG">
 <br>
 
 In some HPC scenarios such as benchmarking, it is interesting to be able to scale up the available bandwidth on the storage tier to remove any potential i/o bottlenecks while a benchmark or job is running, and then reduce the capacity & bandwidth again when the job/benchmark is finished, thus keeping costs to a minimum. 
@@ -33,7 +33,7 @@ Ultra tier volumes will grow throughput at 128MiB/s with every 1TiB in capacity 
 
 Before you run your job/benchmark, increase the Ultra tier bandwidth as follows: 
 
-<img src="anf_resize.1.png">
+<img src="anf_resize.1.PNG">
 
 ### Step 2: Resize Back Down to 4TiB to Optimize Costs
 
