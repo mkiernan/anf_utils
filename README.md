@@ -6,17 +6,7 @@ These bash scripts are provided to interact with ANF from your linux cluster or 
 
 ## 1. anf_resize.sh
 
-<a href=anf_resize.sh>anf_resize.sh</a> is a standalone utility that allows you to resize a volume and it's containing capacity pool up or down on demand.
-
-In some HPC scenarios it is useful to be able to scale up the available bandwidth on the storage tier while a benchmark or job is running, and then reduce the capacity & bandwidth again when the job/benchmark is finished, thus keeping costs to a minimum. The API calls and resize operations complete quickly enough that this script is practical to use as part of a pre- & post- task when running HPC jobs. If you prefer to do it by hand you can do so <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resize-capacity-pools-or-volumes">via the Azure Portal</a>.
-
-The following table illustrates how ANF scales i/o capacity with the size of the size of the volumes on each storage service Tier. More information is available on <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels#throughput-limits">this page</a>.
-<br>
-<img src="img/tiers.PNG">
-<br>
-
-
-Script utilization:
+<a href=anf_resize.sh>anf_resize.sh</a> is a standalone utility that allows you to resize a volume and it's containing capacity pool up or down on demand. Script utilization:
 ```
 ./anf_resize.sh
 
@@ -29,6 +19,13 @@ Usage: anf_resize.sh [--account-name,-a <ANF account name>]
 
 eg: anf_resize.sh -r mygrp -a myanf -p mypool001 -v myvol001 --pool-size 16 --vol-size 16
 ```
+
+In some HPC scenarios it is useful to be able to scale up the available bandwidth on the storage tier while a benchmark or job is running, and then reduce the capacity & bandwidth again when the job/benchmark is finished, thus keeping costs to a minimum. The API calls and resize operations complete quickly enough that this script is practical to use as part of a pre- & post- task when running HPC jobs. If you prefer to do it by hand you can do so <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resize-capacity-pools-or-volumes">via the Azure Portal</a>.
+
+The following table illustrates how ANF scales i/o capacity with the size of the size of the volumes on each storage service Tier. More information is available on <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels#throughput-limits">this page</a>.
+<br>
+<img src="img/tiers.PNG">
+<br>
 
 ### Example Use Case
 Ultra tier volumes will grow throughput at 128MiB/s with every 1TiB in capacity up to a peak of 4.5GiB/s at around 40TiB. If you therefore have under 4TiB of data, it makes sense to grow up to 40TiB to maximize performance, and then reduce to 4TiB for steady state at lower cost. 
