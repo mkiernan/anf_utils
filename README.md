@@ -10,12 +10,11 @@ These bash scripts are provided to interact with ANF from your linux cluster or 
 
 In some HPC scenarios it is useful to be able to scale up the available bandwidth on the storage tier while a benchmark or job is running, and then reduce the capacity & bandwidth again when the job/benchmark is finished, thus keeping costs to a minimum. The API calls and resize operations complete quickly enough that this script is practical to use as part of a pre- & post- task when running HPC jobs. If you prefer to do it by hand you can do so <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resize-capacity-pools-or-volumes">via the Azure Portal</a>.
 
-The following table illustrates how ANF scales i/o capacity with the size of the size of the volumes on each storage service Tier.
+The following table illustrates how ANF scales i/o capacity with the size of the size of the volumes on each storage service Tier. More information is available on <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels#throughput-limits">this page</a>.
 <br>
 <img src="img/tiers.PNG">
 <br>
 
-More information is available on <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels#throughput-limits">this page</a>.
 
 Script utilization:
 ```
