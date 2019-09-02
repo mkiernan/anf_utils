@@ -15,7 +15,11 @@ usage()
                      [--volume-name,-v <volume name>]\n\
                      [--pool-size <pool size in TiB>] \n\
                      [--vol-size <volume size in TiB>]\n"
-    echo -e "eg: $(basename $0) -r mygrp -a myanf -p mypool001 -v myvol001 --pool-size 16 --vol-size 16\n"
+
+    echo -e "eg: resize up for max throughput on ultra tier:"
+    echo -e "$(basename $0) -r mygrp -a myanf -p mypool001 -v myvol001 --pool-size 40 --vol-size 40\n"
+    echo -e "eg: resize back down for cost optimization:"
+    echo -e "$(basename $0) -r mygrp -a myanf -p mypool001 -v myvol001 --pool-size 4 --vol-size 4\n"
     exit 1
 }
 

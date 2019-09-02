@@ -17,7 +17,11 @@ Usage: anf_resize.sh [--account-name,-a <ANF account name>]
                      [--pool-size <pool size in TiB>]
                      [--vol-size <volume size in TiB>]
 
-eg: anf_resize.sh -r mygrp -a myanf -p mypool001 -v myvol001 --pool-size 16 --vol-size 16
+eg: resize up for max throughput on ultra tier:
+anf_resize.sh -r mygrp -a myanf -p mypool001 -v myvol001 --pool-size 40 --vol-size 40
+
+eg: resize back down for cost optimization:
+anf_resize.sh -r mygrp -a myanf -p mypool001 -v myvol001 --pool-size 4 --vol-size 4
 ```
 
 In some HPC scenarios it is useful to be able to scale up the available bandwidth on the storage tier while a benchmark or job is running, and then reduce the capacity & bandwidth again when the job/benchmark is finished, thus keeping costs to a minimum. The API calls and resize operations complete quickly enough that this script is practical to use as part of a pre- & post- task when running HPC jobs. If you prefer to do it by hand you can do so <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resize-capacity-pools-or-volumes">via the Azure Portal</a>.
