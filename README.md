@@ -31,7 +31,7 @@ The following table illustrates how ANF scales i/o capacity with the size of the
 <img src="img/tiers.PNG" width="282" height="113">
 <br>
 
-The cells highlighted in green below indicate where the maximum bandwidth can be reached per service tier type: 
+The cells highlighted in green below indicate at which capacity the maximum (sequential read) bandwidth can be reached per service tier type: 
 <br>
 <img src="img/maxperf2.png"> 
 <br>
