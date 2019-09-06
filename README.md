@@ -33,7 +33,7 @@ The following table illustrates how ANF scales i/o capacity with the size of the
 
 The cells highlighted in green below indicate where the maximum bandwidth can be reached per service tier type: 
 <br>
-<img src="img/maxperf.png"> 
+<img src="img/maxperf2.png"> 
 <br>
 
 ### Example Use Case
