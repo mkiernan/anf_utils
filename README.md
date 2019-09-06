@@ -28,7 +28,7 @@ In some HPC scenarios it is useful to be able to scale up the available bandwidt
 
 The following table illustrates how ANF scales i/o capacity with the size of the size of the volumes on each storage service Tier. More information is available on <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels#throughput-limits">this page</a>.
 <br>
-<img src="img/tiers.PNG">
+<img src="img/tiers.PNG" width="282" height="113">
 <br>
 
 The cells highlighted in green below indicate where the maximum bandwidth can be reached per service tier type: 
