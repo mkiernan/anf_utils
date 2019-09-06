@@ -31,6 +31,11 @@ The following table illustrates how ANF scales i/o capacity with the size of the
 <img src="img/tiers.PNG">
 <br>
 
+The cells highlighted in green below indicate where the maximum bandwidth can be reached per service tier type: 
+<br>
+<img src="img/maxperf.png"> 
+<br>
+
 ### Example Use Case
 Ultra tier volumes will grow throughput at 128MiB/s with every 1TiB in capacity up to a peak of 4.5GiB/s at around 40TiB. If you therefore have under 4TiB of data, it makes sense to grow up to 40TiB to maximize performance, and then reduce to 4TiB for steady state at lower cost. 
 
