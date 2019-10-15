@@ -57,9 +57,9 @@ NetApp Data ONTAP systems come with a key feature known as Snapshots. Data ONTAP
 
 NetApp snapshots are normally controlled and initiated using a built in schedule, and thus protection is automated from the time of volume creation. At the time of writing Azure NetApp Files does not yet support this automated functionality. However, there are options to initialize the creation and cycling of snapshot backups. 
 
-*Option 1: Creation & Deletion of Snapshots via the Azure Portal. 
-*Option 2: Azure Functions - https://github.com/kirkryan/anfScheduler 
-*Option 3: Client side script “anf_snapshot.sh” - https://github.com/mkiernan/anf_utils
+* Option 1: Creation & Deletion of Snapshots via the Azure Portal. 
+* Option 2: Azure Functions - https://github.com/kirkryan/anfScheduler 
+* Option 3: Client side script “anf_snapshot.sh” - https://github.com/mkiernan/anf_utils
 
 The first option is good for manual backups when major changes are about to happen to the filesystem, or you want to be sure you have a recovery point in place after completing a complex piece of work. The second option is great for completely automating snapshot creations even when all of your server infrastructure is offline. The 3rd option provides a simple utility for Linux/HPC administrators to use a bash script launched from an hourly cron script running on a persistent linux node as follows: 
 0 * * * * /hpc/anf_utils/anf_snapshot.sh -a umanf -r umgrp -p pool001 -v data -l westeurope
