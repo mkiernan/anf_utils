@@ -61,8 +61,10 @@ NetApp snapshots are normally controlled and initiated using a built in schedule
 * Option 2: Azure Functions - https://github.com/kirkryan/anfScheduler 
 * Option 3: Client side script “anf_snapshot.sh” - https://github.com/mkiernan/anf_utils
 
-The first option is good for manual backups when major changes are about to happen to the filesystem, or you want to be sure you have a recovery point in place after completing a complex piece of work. The second option is great for completely automating snapshot creations even when all of your server infrastructure is offline. The 3rd option provides a simple utility for Linux/HPC administrators to use a bash script launched from an hourly cron script running on a persistent linux node as follows: 
+The first option is good for manual backups when major changes are about to happen to the filesystem, or you want to be sure you have a recovery point in place after completing a complex piece of work. The second option is great for completely automating snapshot creations even when all of your server infrastructure is offline. The 3rd option provides a simple utility for Linux/HPC administrators to use a bash script launched from an hourly cron script running on a persistent linux node as follows:
+```
 0 * * * * /hpc/anf_utils/anf_snapshot.sh -a umanf -r umgrp -p pool001 -v data -l westeurope
+```
 This will create a snapshot on the desired ANF account “umanf” in volume “data”, capacity pool “pool001” once per hour, and will retain and purge snapshots according to a default predetermined schedule. The resulting snapshots are shown in the diagram below. Note that you can still create snapshots manually via the portal (or Azure CLI or API) while the schedule snapshots are running. 
 
 <img src="img/snapshots.png"> 
