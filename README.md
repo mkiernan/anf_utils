@@ -53,7 +53,26 @@ Once you've run your job/benchmark, you can resize back down as follows:
 
 ## 2. anf_snapshot.sh
 
-One of the key foundational features of NetApp is space efficient, instantaneous snapshots - meaning continuous protection for your data. Physical NetApp systems come with snapshots enabled and automated to run on a schedule out-of-the-box. Unfortunately the traditional NetApp WAFL scheduled snapshot functionality is not there yet with ANF [coming soon I'm assured!]. In the meantime you can create a snapshot interactively from the Azure Portal or the CLI, but there are no utilities in there yet to help you automate initiation of snapshots and manage the snapshot cycle. This script provides that. 
+NetApp Data ONTAP systems come with a key feature known as Snapshots. Data ONTAP snapshots are extremely space efficient (taking almost zero space at the time of creation) and are created instantaneously since no data is moved at the time of creation. In the Data ONTAP WAFL filesystem blocks are not overwritten until they are recycled, and thus point-in-time copies using pointer based references are an extremely space efficient and performance neutral methodology to create backups. 
 
-[Coming shortly - still testing this one]
+NetApp snapshots are normally controlled and initiated using a built in schedule, and thus protection is automated from the time of volume creation. At the time of writing Azure NetApp Files does not yet support this automated functionality. However, there are options to initialize the creation and cycling of snapshot backups. 
+
+*Option 1: Creation & Deletion of Snapshots via the Azure Portal. 
+*Option 2: Azure Functions - https://github.com/kirkryan/anfScheduler 
+*Option 3: Client side script “anf_snapshot.sh” - https://github.com/mkiernan/anf_utils
+
+The first option is good for manual backups when major changes are about to happen to the filesystem, or you want to be sure you have a recovery point in place after completing a complex piece of work. The second option is great for completely automating snapshot creations even when all of your server infrastructure is offline. The 3rd option provides a simple utility for Linux/HPC administrators to use a bash script launched from an hourly cron script running on a persistent linux node as follows: 
+0 * * * * /hpc/anf_utils/anf_snapshot.sh -a umanf -r umgrp -p pool001 -v data -l westeurope
+This will create a snapshot on the desired ANF account “umanf” in volume “data”, capacity pool “pool001” once per hour, and will retain and purge snapshots according to a default predetermined schedule. The resulting snapshots are shown in the diagram below. Note that you can still create snapshots manually via the portal (or Azure CLI or API) while the schedule snapshots are running. 
+
+<img src="img/snapshots.png"> 
+
+If you or your users have inadvertently destroyed or corrupted data on the filesystem, it is then perfectly straightforward to restore files from the snapshots by one of two methods: 
+Restore Method 1: “.snapshot” folder. 
+A snapshot represents a complete (and consistent) point-in-time view of the entire filesystem as it was a the moment the snapshot was taken. Thus using the default schedule of hourly snapshot events, we should see a complete filesystem for each hour. Azure NetApp Files by default exposes the snapshot views through the “.snapshot” folder in the root of the filesystem tree. You can see an example here: 
+
+<img src="img/restore.png">
+
+It is therefore simply a matter of entering the folder for the relevant snapshot, finding the lost/corrupted files and copying them back into the live filesystem folder using the Linux “cp” command. This makes restores available for every end user as a self-service capability, without having to restort to backups and helpdesk tickets. 
+
 
